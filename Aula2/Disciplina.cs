@@ -9,7 +9,7 @@
         public List<Aluno> ListaAlunos { get; set; }
         public Dictionary<Aluno, double> MapaDeNotas { get; set; }
         public Dictionary<Aluno, int> MapaDeFaltas { get; set; }
-        
+
         public Disciplina(String Nome, int Codigo , int CargaHoraria) {
             this.Nome = Nome;
             this.Codigo = Codigo;
@@ -38,12 +38,17 @@
             
             return ListaAlunos.First(o => o.Nome.Equals(strBusca));
         }
+
+        public void LancarFalta(Aluno aluno, int faltas)
+        {
+            MapaDeFaltas[aluno] += faltas;
+        }
         
         public void LancarNota(Aluno aluno, double np1, double np2, double trabalho) 
         {
-            double NotaFinal = 0;
-            NotaFinal =(np1 * 0.3) + (np2 * 0.3) + (trabalho * 0.4);
-            MapaDeNotas[aluno] = NotaFinal;
+            double notaFinal = 0;
+            notaFinal =(np1 * 0.3) + (np2 * 0.3) + (trabalho * 0.4);
+            MapaDeNotas[aluno] = notaFinal;
         }
         
         public void CadastrarAlunoViaConsole()

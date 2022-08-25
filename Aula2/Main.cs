@@ -12,19 +12,16 @@ namespace AulaOO
             do
             {
                 Console.Clear();
-                Console.WriteLine("Entre com a Opcao Desejada:");
+                Console.WriteLine("Entre com a Opção Desejada:");
                 Console.WriteLine("1 Cadastrar Aluno");
                 Console.WriteLine("2 Lancar Nota");
                 Console.WriteLine("3 Consultar Nota");
                 Console.WriteLine("4 Listar Nota");
+                Console.WriteLine("5 Lançar falta");
                 Console.WriteLine("sair (Para encerrar)");
-
- 
-
+                
                 entrada = Console.ReadLine();
-
- 
-
+                
                 switch (entrada)
                 {
                     case "1": disciplina.CadastrarAlunoViaConsole();
@@ -70,6 +67,22 @@ namespace AulaOO
                         foreach (KeyValuePair<Aluno, double> alunoAtual in disciplina.MapaDeNotas)
                         {
                             Console.WriteLine($"Aluno: {alunoAtual.Key.Nome} Matricula: {alunoAtual.Key.Matricula} Nota Final: {alunoAtual.Value}");
+                        }
+                        break;
+                    case "5":
+                        Console.WriteLine("Entre com Nome ou Matricula do Aluno para lancar falta:");
+                        try
+                        {
+                            aluno = disciplina.LocalizarAluno(Console.ReadLine());
+                            Console.WriteLine($"Localizado : Aluno: {aluno.Nome} Matricula: {aluno.Matricula}");
+                            Console.WriteLine("Entre com as faltas do aluno:");
+                            int faltas = Convert.ToInt32(Console.ReadLine());
+                            disciplina.LancarFalta(aluno, faltas);
+                            Console.WriteLine("Total de faltas: " + disciplina.MapaDeFaltas[aluno]);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Aluno nao encontrado");
                         }
                         break;
                     case "sair":
